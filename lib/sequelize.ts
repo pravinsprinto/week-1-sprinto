@@ -3,8 +3,8 @@ import { Sequelize } from 'sequelize-typescript';
 import { Book, } from '../models/Book';
 import dotenv from 'dotenv';
 import { User } from "@models/User";
+import { DB_CERT } from './constant';
 dotenv.config();
-
 export const sequelize = new Sequelize({
   database: process.env.DB_NAME,
   username: process.env.DB_USER,
@@ -16,7 +16,7 @@ export const sequelize = new Sequelize({
     ssl: {
       require: true,
       rejectUnauthorized: true,
-      ca: process.env.CERTIFICATE
+      ca: DB_CERT
     }
   }
 });
