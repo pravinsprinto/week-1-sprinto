@@ -1,14 +1,9 @@
 import { Table, Column, Model, ForeignKey, BelongsTo, PrimaryKey, AutoIncrement, DataType, Index, createIndexDecorator } from "sequelize-typescript";
 import { User } from "./User";
 
-
-const bookIndex = createIndexDecorator({
-  unique: true,
-  name: 'idx_author_id',
-  using: 'BTREE',
-})
 @Table({
   timestamps: true,  // Includes createdAt and updatedAt by default
+  tableName: 'books'
 })
 export class Book extends Model {
 
@@ -20,7 +15,10 @@ export class Book extends Model {
   @Column({
     allowNull: false
   })
-  @bookIndex
+  @Index({
+    name: 'idx_title_author',
+    unique: true
+  })
   title!: string;
 
   @Column({
@@ -51,7 +49,7 @@ export class Book extends Model {
 
   @ForeignKey(() => User) // Foreign Key
   @Column
-  @bookIndex
+  @Index('idx_title_author')
   authorId!: number;
 
   @BelongsTo(() => User) // Relationship: Book belongs to an Author

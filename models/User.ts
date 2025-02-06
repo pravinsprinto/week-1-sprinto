@@ -12,6 +12,7 @@ const passwordUpdate = async (instance: User) => {
 
 @Table({
   timestamps: true,
+  tableName: 'users',
   hooks: {
     beforeCreate: passwordUpdate,
     beforeUpdate: passwordUpdate

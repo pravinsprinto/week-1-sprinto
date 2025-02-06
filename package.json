@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build": "npm run generate & next build",
-    "dev": "npm run generate & next dev",
+    "build": "npm run generate && next build && cp us-east-1-bundle.pem .next/server/",
+    "dev": "npm run generate && next dev",
     "start": "next start",
     "generate": "graphql-codegen --config codegen.yml"
   },
