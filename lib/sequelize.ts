@@ -3,12 +3,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { Book, } from '../models/Book';
 import dotenv from 'dotenv';
 import { User } from "@models/User";
-import { join } from 'path';
 dotenv.config();
-const fs = require('fs');
-const certPath = process.env.NODE_ENV === 'production' 
-  ? join(process.cwd(), '.next/server/us-east-1-bundle.pem')
-  : join(process.cwd(), 'us-east-1-bundle.pem');
 
 export const sequelize = new Sequelize({
   database: process.env.DB_NAME,
@@ -21,7 +16,7 @@ export const sequelize = new Sequelize({
     ssl: {
       require: true,
       rejectUnauthorized: true,
-      ca: fs.readFileSync(certPath).toString()
+      ca: process.env.CERTIFICATE
     }
   }
 });
