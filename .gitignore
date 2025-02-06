@@ -29,4 +29,4 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 .env
-us-east-1-bundle.pem
+# us-east-1-bundle.pem
