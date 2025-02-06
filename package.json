@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "npm run generate & next build",
     "dev": "npm run generate & next dev",
     "start": "next start",
     "generate": "graphql-codegen --config codegen.yml"
