@@ -1,0 +1,114 @@
+  type User {
+    id: Int!
+    name: String!
+    email: String!
+    biography: String
+    bornDate: String!
+    password: String!
+    salt: String!
+    profilePicture: String
+    isAuthor: Boolean!
+    books: [Book]
+  }
+  type Book {
+    id: Int!
+    title: String!
+    description: String
+    image: String!
+    publishedDate: String!
+    author: User!
+    averageRating: Float
+    totalReviews: Int!
+  }
+
+  input BookInput {
+    title: String!
+    description: String
+    image: String!
+    publishedDate: String!
+  }
+
+  type Query {
+    books(filter: BookFilterInput, limit: Int, offset: Int): PaginatedBooks!
+    book(id: Int!): Book
+    myBooks(limit: Int, offset: Int, sort: SortInput): PaginatedBooks!
+    user: User
+    bookReviews(bookId: Int!, limit: Int!, offset: Int!): PaginatedReviews!
+  }
+
+  type AuthResponse {
+    user: User!
+    token: String!
+  }
+
+  type Mutation {
+    createBook(bookInput: BookInput!): Book!
+    updateBook(id: ID!, bookInput: BookInput!): Book!
+    deleteBook(id: ID!): DeleteResponse!
+    createReview(reviewInput: ReviewInput!): Review!
+    signup(userInput: UserInput!): AuthResponse!
+    login(loginUserInput: loginUserInput!): AuthResponse!
+  }
+
+  type DeleteResponse {
+    success: Boolean!
+    message: String!
+  }
+
+  input UserInput {
+    name: String!
+    email: String!
+    biography: String
+    bornDate: String!
+    password: String!
+    profilePicture: String
+    isAuthor: Boolean!
+  }
+  input loginUserInput {
+      email: String!
+      password: String!
+  }
+
+  input BookFilterInput {
+    searchTerm: String
+    filterBy: String
+    startDate: String
+    endDate: String
+  }
+
+  type PaginatedBooks {
+    books: [Book]!
+    total: Int!
+  }
+
+  enum SortOrder {
+    ASC
+    DESC
+  }
+
+  input SortInput {
+    field: String!
+    order: SortOrder!
+  }
+
+  type Review {
+    _id: String!
+    rating: Int!
+    comment: String!
+    createdAt: String!
+    user: User!
+    book: Book!
+  }
+
+  input ReviewInput {
+    bookId: Int!
+    rating: Int!
+    comment: String!
+  }
+
+  type PaginatedReviews {
+    reviews: [Review]!
+    total: Int!
+    hasMore: Boolean!
+  }
+

@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@models/*": [
+        "models/*"
+      ],
+      "@lib/*": [
+        "lib/*"
+      ]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+, "graphql/schema.graphql"  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "experiments": {
+    "topLevelAwait": true,
+    "layers": true
+  }
+}
