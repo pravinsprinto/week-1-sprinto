@@ -6,7 +6,8 @@ generates:
       - typescript
       - typescript-operations
       - typescript-react-apollo
+      - typescript-typedefs.js
     config:
       withHooks: true
       withHOC: false
-      withComponent: false 
+      withComponent: false

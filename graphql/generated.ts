@@ -767,3 +767,120 @@ export type GetBookReviewsQueryHookResult = ReturnType<typeof useGetBookReviewsQ
 export type GetBookReviewsLazyQueryHookResult = ReturnType<typeof useGetBookReviewsLazyQuery>;
 export type GetBookReviewsSuspenseQueryHookResult = ReturnType<typeof useGetBookReviewsSuspenseQuery>;
 export type GetBookReviewsQueryResult = Apollo.QueryResult<GetBookReviewsQuery, GetBookReviewsQueryVariables>;
+export const typeDefs = gql`
+type AuthResponse {
+  token: String!
+  user: User!
+}
+
+type Book {
+  author: User!
+  averageRating: Float
+  description: String
+  id: Int!
+  image: String!
+  publishedDate: String!
+  title: String!
+  totalReviews: Int!
+}
+
+input BookFilterInput {
+  endDate: String
+  filterBy: String
+  searchTerm: String
+  startDate: String
+}
+
+input BookInput {
+  description: String
+  image: String!
+  publishedDate: String!
+  title: String!
+}
+
+type DeleteResponse {
+  message: String!
+  success: Boolean!
+}
+
+type Mutation {
+  createBook(bookInput: BookInput!): Book!
+  createReview(reviewInput: ReviewInput!): Review!
+  deleteBook(id: ID!): DeleteResponse!
+  login(loginUserInput: loginUserInput!): AuthResponse!
+  signup(userInput: UserInput!): AuthResponse!
+  updateBook(bookInput: BookInput!, id: ID!): Book!
+}
+
+type PaginatedBooks {
+  books: [Book]!
+  total: Int!
+}
+
+type PaginatedReviews {
+  hasMore: Boolean!
+  reviews: [Review]!
+  total: Int!
+}
+
+type Query {
+  book(id: Int!): Book
+  bookReviews(bookId: Int!, limit: Int!, offset: Int!): PaginatedReviews!
+  books(filter: BookFilterInput, limit: Int, offset: Int): PaginatedBooks!
+  myBooks(limit: Int, offset: Int, sort: SortInput): PaginatedBooks!
+  user: User
+}
+
+type Review {
+  _id: String!
+  book: Book!
+  comment: String!
+  createdAt: String!
+  rating: Int!
+  user: User!
+}
+
+input ReviewInput {
+  bookId: Int!
+  comment: String!
+  rating: Int!
+}
+
+input SortInput {
+  field: String!
+  order: SortOrder!
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+type User {
+  biography: String
+  books: [Book]
+  bornDate: String!
+  email: String!
+  id: Int!
+  isAuthor: Boolean!
+  name: String!
+  password: String!
+  profilePicture: String
+  salt: String!
+}
+
+input UserInput {
+  biography: String
+  bornDate: String!
+  email: String!
+  isAuthor: Boolean!
+  name: String!
+  password: String!
+  profilePicture: String
+}
+
+input loginUserInput {
+  email: String!
+  password: String!
+}
+`;

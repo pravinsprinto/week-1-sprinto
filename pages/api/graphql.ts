@@ -5,11 +5,7 @@ import { resolvers } from "../../graphql/resolver";
 import { authMiddleware, AuthenticatedRequest } from '../../middleware/auth';
 import { connectDB } from "@lib/sequelize";
 import {dbConnect} from '../../lib/mongoose';
-// import { readFileSync } from 'fs';
-// import { join } from 'path';
-// import { verifyToken } from '../../lib/auth';
-const fs = require('fs');
-const typeDefs = fs.readFileSync('./graphql/schema.graphql', 'utf8')
+import { typeDefs } from '../../graphql/generated';
 const server = new ApolloServer({
     typeDefs : typeDefs,
     resolvers,
