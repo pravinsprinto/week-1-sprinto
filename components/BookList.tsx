@@ -5,6 +5,7 @@ import { StarIcon } from '@radix-ui/react-icons';
 import { Book as BookIcon, AlertCircle } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import DOMPurify from 'dompurify';
 
 export default function BookList() {
   const [filters, setFilters] = useState<SearchFilters>({
@@ -178,7 +179,7 @@ export default function BookList() {
                   </div>
                 </div>
 
-                <Text className="line-clamp-2 text-gray-600" dangerouslySetInnerHTML={{ __html: book.description }} />
+                <Text className="line-clamp-2 text-gray-600" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(book.description) }} />
 
                 <Flex gap="2" mt="2">
                   <Badge color="blue">

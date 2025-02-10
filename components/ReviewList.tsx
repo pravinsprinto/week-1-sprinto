@@ -17,7 +17,9 @@ export default function ReviewList({ bookId }: ReviewListProps) {
             bookId,
             limit: REVIEWS_PER_PAGE,
             offset: 0
-        }
+        },
+        // ignore cache
+        fetchPolicy: 'network-only'
     });
     useEffect(() => {
         refetch();

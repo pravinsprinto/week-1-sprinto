@@ -10,6 +10,7 @@ import Link from 'next/link';
 import WriteReview from '../../components/WriteReview';
 import ReviewList from '../../components/ReviewList';
 import { Card, Text, Flex } from '@radix-ui/themes';
+import { useAuth } from 'contexts/AuthContext';
 
 function BookDetails() {
     const router = useRouter();
@@ -19,12 +20,17 @@ function BookDetails() {
     const [toastMessage, setToastMessage] = useState('');
 
     const { id } = router.query;
-    const { data: userData } = useGetUserQuery();
+    const { data: userData , refetch: refetchUser } = useGetUserQuery();
+    const { user, logout } = useAuth();
     useEffect(() => {
         if (showReviewForm) {
             reviewFormRef.current?.scrollIntoView({ behavior: 'smooth' });
         }
     }, [showReviewForm]);
+
+    useEffect(() => {
+        refetchUser();
+    }, [user]);
 
     const { loading, error, data, refetch } = useGetBookDetailsQuery({
         variables: { id: parseInt(id as string) },
@@ -49,9 +55,9 @@ function BookDetails() {
 
     const { book } = data;
     const sanitizedDescription = DOMPurify.sanitize(book.description || '');
-    console.log(sanitizedDescription);
+    // console.log(sanitizedDescription);
     const canReview = userData?.user?.id !== book.author.id;
-    //   console.log(userData,book);
+      console.log(userData);
 
     const handleReviewError = (error: string) => {
         setToastMessage(error);

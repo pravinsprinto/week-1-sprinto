@@ -18,10 +18,10 @@ export default function Layout({ children }: LayoutProps) {
   const [isAuthor, setIsAuthor] = useState(false);
 
   useEffect(() => {
-    if (data?.user) {
-      setIsAuthor(data.user.isAuthor || false);
+    if (user) {
+      setIsAuthor(user.isAuthor || false);
     }
-  }, [data]);
+  }, [user]);
 
   const navLinks = [
     { href: '/', label: 'Home' },

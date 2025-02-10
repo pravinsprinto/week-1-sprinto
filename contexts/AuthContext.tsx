@@ -1,11 +1,11 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Author } from '../models/Author';
+import { User } from '../models';
 import { useRouter } from 'next/router';
 
 interface AuthContextType {
-  user: Author | null;
+  user: User | null;
   token: string | null;
-  login: (token: string, user: Author) => void;
+  login: (token: string, user: User) => void;
   logout: () => void;
 }
 
@@ -17,7 +17,7 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<Author | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -39,11 +39,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = (token: string, user: Author) => {
-    setToken(token);
-    setUser(user);
+  const login = (token: string, user: User) => {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
+    setToken(token);
+    setUser(user);
   };
 
   const logout = () => {

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { EditBookForm } from '../components/EditBookForm';
 import { DeleteBookButton } from '../components/DeleteBookButton';
 import { useRouter } from 'next/router';
+import DOMPurify from 'dompurify';
 
 function MyBooks() {
   const [sortConfig, setSortConfig] = useState<{ field: string; order: 'ASC' | 'DESC' }>({
@@ -141,9 +142,7 @@ function MyBooks() {
               </p>
             </div>
 
-            <p className="line-clamp-2 text-gray-600 text-sm leading-relaxed">
-              {book.description}
-            </p>
+            <p className="line-clamp-2 text-gray-600 text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(book.description) }} />
 
             <div className="flex gap-2 mt-auto pt-2">
               <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
