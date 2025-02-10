@@ -9,7 +9,7 @@ export function SignupForm() {
     password: '',
     biography: '',
     bornDate: '',
-    profilePicture: '',
+    profilePicture: 'https://avatar.iran.liara.run/public/',
     isAuthor: false
   });
 
@@ -34,7 +34,7 @@ export function SignupForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Existing fields */}
-      <div>
+      {/* <div>
         <label className="block text-sm font-medium text-gray-700">
           Profile Picture URL
         </label>
@@ -44,7 +44,7 @@ export function SignupForm() {
           value={formData.profilePicture}
           onChange={(e) => setFormData({ ...formData, profilePicture: e.target.value })}
         />
-      </div>
+      </div> */}
       
       <div>
         <label className="block text-sm font-medium text-gray-700">
