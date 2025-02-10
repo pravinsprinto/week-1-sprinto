@@ -202,7 +202,7 @@ const Mutation: MutationResolvers = {
     if (book.authorId !== context.user.id) {
       throw new Error('Not authorized to delete this book');
     }
-
+    await Review.deleteMany({ bookId: args.id  });
     await book.destroy();
     return {
       success: true,
